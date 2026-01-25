@@ -1,11 +1,13 @@
 from collections import defaultdict
 
+from django_filters import rest_framework as filters
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from .filters import TaskFilter
 from .serializers import TaskSerializer, TaskTreeSerializer
 from .models import Task
 from .permissions import IsOwner
@@ -22,6 +24,8 @@ class TaskList(generics.ListCreateAPIView):
     """List all tasks, create new task."""
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = TaskFilter
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user)

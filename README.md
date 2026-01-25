@@ -26,9 +26,9 @@ API docs here: [http://localhost:8000/api/docs/swagger/](http://localhost:8000/a
 
 ### Examples
 
-* Show only completed tasks: `/tasks/?is_completed=true`
-* Show tasks with due date before 1. 2. 2026: `/tasks/?due_date__lt=2026-02-01`
-* Show tasks with title containing a keyword: `/tasks/?title__icontains=keyword`
+* Show only completed tasks: GET `/tasks/?is_completed=true`
+* Show tasks with due date before 1. 2. 2026: GET `/tasks/?due_date__lt=2026-02-01`
+* Show tasks with title containing a keyword: GET `/tasks/?title__icontains=keyword`
 * Create new task: POST `/tasks/` (returns id=1)
 ```json
 {"title": "Morning routine", "description": "Prepare for the day", "due_date": "2026-01-25"}
@@ -103,3 +103,8 @@ We use [pre-commit](https://pre-commit.com/) to check and format code.
 * Ruff settings are located in [pyproject.toml](./pyproject.toml).
 * You can also run the hooks manually for all files with `pre-commit run --all-files` or for one file with `pre-commit run --files path/to/file.py`.
 * To skip pre-commit, either use `git commit -m 'message' --no-verify` or remove hooks completely via `pre-commit uninstall`.
+* **Github CI** contains the pre-commit check (runs for new PR). Example PR with fail [here](https://github.com/jontesek/django-todoapp/pull/2).
+
+## TODO
+
+* For production, we need to run the app via a proper server, not the development server.

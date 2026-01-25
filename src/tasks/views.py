@@ -41,3 +41,13 @@ class RootTaskList(generics.ListAPIView):
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user, parent=None)
+    
+
+class SubtasksList(generics.ListAPIView):
+    """List all direct subtasks of the given task"""
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        task_id = self.kwargs.get('pk')
+        return Task.objects.filter(user=self.request.user, parent=task_id)

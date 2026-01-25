@@ -11,4 +11,6 @@ urlpatterns = [
     path("<int:pk>/", views.TaskDetail.as_view()),
     # Tasks without parent
     path("root/", views.RootTaskList.as_view()),
+    # Direct subtasks
+    path('<int:pk>/subtasks/', views.SubtasksList.as_view()),
 ]

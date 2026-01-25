@@ -57,8 +57,12 @@ class TaskHierarchyTest(APITestCase):
         # Create tasks
         self.task_1 = Task.objects.create(title="Wake up", user=self.user)
         self.task_2 = Task.objects.create(title="Morning routine", user=self.user)
-        self.task_3 = Task.objects.create(title="Make fruit tea", parent=self.task_2, user=self.user)
-        self.task_4 = Task.objects.create(title="Brew hot water", parent=self.task_3, user=self.user)
+        self.task_3 = Task.objects.create(
+            title="Make fruit tea", parent=self.task_2, user=self.user
+        )
+        self.task_4 = Task.objects.create(
+            title="Brew hot water", parent=self.task_3, user=self.user
+        )
         # Login with the user
         self.client.force_authenticate(user=self.user)
 

@@ -8,7 +8,9 @@ class Task(models.Model):
     due_date = models.DateField(blank=True, null=True)
     is_completed = models.BooleanField(default=False, db_index=True)
     # Relationships
-    parent = models.ForeignKey("Task", related_name="subtasks", on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey(
+        "Task", related_name="subtasks", on_delete=models.CASCADE, blank=True, null=True
+    )
     user = models.ForeignKey("auth.User", related_name="tasks", on_delete=models.CASCADE)
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)

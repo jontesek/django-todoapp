@@ -20,3 +20,37 @@ dependencies = [
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+    # flake8-bandit
+    "S",
+    # pydocstyle
+    "D",
+]
+
+ignore = [
+    # D100-D107 ignore missing docstrings
+    # D203 disabled in favor of D211
+    # D213 disabled in favor of D212
+    # D406, D407, D408, D409, D413 disabled because we use Google convention.
+    "D100","D101","D102","D103","D104","D105","D106","D107","D203","D213","D406","D407","D408","D409",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S101"]

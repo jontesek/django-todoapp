@@ -66,3 +66,23 @@ Hierarchy is handled by self-referencing: Field `parent_id` connects subtask to 
 
 This solution is simple to implement and to use.
 There are other solutions if a better performance would be needed (e.g. Django MPTT).
+
+## Development
+
+### Poetry
+
+We use [Poetry](https://python-poetry.org/) for requirements management. 
+
+* `poetry install` - create venv
+* `poetry add package` - add new package
+* `docker-compose build --no-cache` - recreate the image
+
+### Pre-commit
+
+We use [pre-commit](https://pre-commit.com/) to check and format code.
+
+* `pre-commit install` - install hooks defined in [.pre-commit-config.yaml](./.pre-commit-config.yaml)
+* When you commit, your code will be checked by linter and then formatted (by [ruff](https://docs.astral.sh/ruff/)). 
+* Ruff settings are located in [pyproject.toml](./pyproject.toml).
+* You can also run the hooks manually for all files with `pre-commit run --all-files` or for one file with `pre-commit run --files path/to/file.py`.
+* To skip pre-commit, either use `git commit -m 'message' --no-verify` or remove hooks completely via `pre-commit uninstall`.

@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=200)),
-                ('description', models.TextField()),
+                ('description', models.TextField(blank=True, null=True)),
                 ('due_date', models.DateField(blank=True, null=True)),
                 ('is_completed', models.BooleanField(db_index=True, default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),

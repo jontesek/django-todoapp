@@ -7,6 +7,8 @@ Interview task - simple Todo app (tasks)
 * `docker-compose exec app python src/manage.py migrate` - init DB
 * `docker-compose exec app python src/manage.py createsuperuser` - create user (e.g. test, test)
 
+Run tests: `docker-compose exec app python src/manage.py test tasks`
+
 ## Usage
 
 API accessible at: `http://localhost:8000/tasks/`

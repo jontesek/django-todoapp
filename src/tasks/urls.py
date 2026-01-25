@@ -6,13 +6,13 @@ urlpatterns = [
     # Health check
     path("health/", views.health),
     # Task list or create
-    path("", views.TaskList.as_view()),
+    path("", views.TaskList.as_view(), name="tasks-all"),
     # Task by ID
-    path("<int:pk>/", views.TaskDetail.as_view()),
+    path("<int:pk>/", views.TaskDetail.as_view(), name="task-detail"),
     # Tasks without parent
-    path("root/", views.RootTaskList.as_view()),
+    path("root/", views.RootTaskList.as_view(), name="only-root-tasks"),
     # Direct subtasks
-    path('<int:pk>/subtasks/', views.SubtasksList.as_view()),
+    path('<int:pk>/subtasks/', views.SubtasksList.as_view(), name="direct-subtasks"),
     # All subtasks
-    path('<int:pk>/subtasks-tree/', views.SubtasksTreeList.as_view()),
+    path('<int:pk>/subtasks-tree/', views.SubtasksTreeList.as_view(), name="subtasks-tree"),
 ]

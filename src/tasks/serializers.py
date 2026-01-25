@@ -24,3 +24,21 @@ class TaskSerializer(serializers.ModelSerializer):
                     raise serializers.ValidationError("Circular dependency detected.")
                 curr = curr.parent
         return value
+    
+
+class TaskTreeSerializer(TaskSerializer):
+    subtasks = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Task
+        fields = TaskSerializer.Meta.fields + ["subtasks"]
+
+    def get_subtasks(self, obj):
+        children_map = self.context.get('children_map', {})
+        children = children_map.get(obj.id, [])
+
+        return TaskTreeSerializer(
+            children, 
+            many=True, 
+            context=self.context
+        ).data

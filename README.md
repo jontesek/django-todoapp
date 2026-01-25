@@ -11,7 +11,9 @@ Run tests: `docker-compose exec app python src/manage.py test tasks`
 
 ## Usage
 
-API accessible at: `http://localhost:8000/tasks/`
+API accessible at: [http://localhost:8000/tasks/](http://localhost:8000/tasks/)
+
+API docs here: [http://localhost:8000/api/docs/swagger/](http://localhost:8000/api/docs/swagger/)
 
 ### Endpoints
 

@@ -23,6 +23,17 @@ class TaskSerializer(serializers.ModelSerializer):
                 if curr.pk == self.instance.pk:
                     raise serializers.ValidationError("Circular dependency detected.")
                 curr = curr.parent
+        
+        return value
+    
+    def validate_is_completed(self, value):
+        # Check when setting the task to completed
+        if self.instance and value is True:
+            # Check if all subtasks are completed
+            if self.instance.subtasks.filter(is_completed=False):
+                msg = "Cannot complete this task because some subtasks are not completed."
+                raise serializers.ValidationError(msg)
+        
         return value
     
 

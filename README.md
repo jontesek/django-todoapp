@@ -69,6 +69,23 @@ There are other solutions if a better performance would be needed (e.g. Django M
 
 ## Development
 
+### Environment variables
+
+Defined in `docker-compose.yml`:
+
+```ini
+DATABASE_URL=postgres://user:password@db:5432/db
+ENVIRONMENT=local|production
+SECRET_KEY=xyz
+```
+
+### Logging
+
+We use [structlog](https://www.structlog.org/en/stable/) for logging. Locally, the logs are pretty-printed. On production, the logs are in JSON.
+The logs are configured [here](./src/config/logs.py).
+
+Package [django-structlog](https://django-structlog.readthedocs.io/en/latest/index.html) is used to enhance the default logs.
+
 ### Poetry
 
 We use [Poetry](https://python-poetry.org/) for requirements management. 

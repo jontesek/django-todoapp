@@ -6,10 +6,19 @@ from .models import Task
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ["id", "title", "description", "due_date", "is_completed", "parent", "created_at", "updated_at"]
+        fields = [
+            "id",
+            "title",
+            "description",
+            "due_date",
+            "is_completed",
+            "parent",
+            "created_at",
+            "updated_at",
+        ]
 
     def validate_parent(self, value):
-        request = self.context.get('request')
+        request = self.context.get("request")
 
         # Check that only user's task can be set as parent
         if value and request and value.user != request.user:
@@ -23,19 +32,19 @@ class TaskSerializer(serializers.ModelSerializer):
                 if curr.pk == self.instance.pk:
                     raise serializers.ValidationError("Circular dependency detected.")
                 curr = curr.parent
-        
+
         return value
-    
+
     def validate_is_completed(self, value):
         # Check when setting the task to completed
-        if self.instance and value is True:
+        if self.instance and value is True:  # noqa: SIM102
             # Check if all subtasks are completed
             if self.instance.subtasks.filter(is_completed=False):
                 msg = "Cannot complete this task because some subtasks are not completed."
                 raise serializers.ValidationError(msg)
-        
+
         return value
-    
+
 
 class TaskTreeSerializer(TaskSerializer):
     subtasks = serializers.SerializerMethodField()
@@ -45,11 +54,7 @@ class TaskTreeSerializer(TaskSerializer):
         fields = TaskSerializer.Meta.fields + ["subtasks"]
 
     def get_subtasks(self, obj):
-        children_map = self.context.get('children_map', {})
+        children_map = self.context.get("children_map", {})
         children = children_map.get(obj.id, [])
 
-        return TaskTreeSerializer(
-            children, 
-            many=True, 
-            context=self.context
-        ).data
+        return TaskTreeSerializer(children, many=True, context=self.context).data

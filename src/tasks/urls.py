@@ -9,4 +9,6 @@ urlpatterns = [
     path("", views.TaskList.as_view()),
     # Task by ID
     path("<int:pk>/", views.TaskDetail.as_view()),
+    # Tasks without parent
+    path("root/", views.RootTaskList.as_view()),
 ]

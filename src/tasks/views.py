@@ -32,3 +32,12 @@ class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+
+class RootTaskList(generics.ListAPIView):
+    """List all tasks without parent"""
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user, parent=None)

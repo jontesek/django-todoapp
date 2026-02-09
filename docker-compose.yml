@@ -27,7 +27,7 @@ services:
     environment:
       - ENVIRONMENT=local
       - DATABASE_URL=postgres://task_user:task_pass@db:5432/todo_app
-      - SECRET_KEY=django-insecure-qr1q-utowh0v7kjlawb4cl4&!yg$wex)@+v2swq$5x74&lix$p
+      - SECRET_KEY=AIP0mAKfBEm8nDyDmzGJE2I7cLC54m89B4wSInj6ZVy3AEe0nMRJSY8oDcl23Eqx
     stdin_open: true # docker run -i
     tty: true        # docker run -t
     depends_on:

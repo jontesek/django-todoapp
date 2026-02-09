@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from .models import Task
@@ -57,6 +58,7 @@ class TaskTreeSerializer(TaskSerializer):
         model = Task
         fields = TaskSerializer.Meta.fields + ["subtasks"]
 
+    @extend_schema_field({"type": "array", "items": {"$ref": "#/components/schemas/TaskTree"}})
     def get_subtasks(self, obj):
         children_map = self.context.get("children_map", {})
         children = children_map.get(obj.id, [])

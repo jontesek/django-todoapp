@@ -33,6 +33,10 @@ class TaskList(generics.ListCreateAPIView):
     filterset_class = TaskFilter
 
     def get_queryset(self):
+        # Prevent the AnonymousUser error during schema generation
+        if getattr(self, "swagger_fake_view", False):
+            return Task.objects.none()
+
         tasks = Task.objects.filter(user=self.request.user)
         logger.info(
             "task_list.get_queryset.result",

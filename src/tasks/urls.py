@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     # Health check
     path("health/", views.health),
-    # Task list or create
+    # List tasks, create new task
     path("", views.TaskList.as_view(), name="tasks-all"),
     # Task by ID
     path("<int:pk>/", views.TaskDetail.as_view(), name="task-detail"),

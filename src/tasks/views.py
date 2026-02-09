@@ -51,7 +51,7 @@ class TaskList(generics.ListCreateAPIView):
 
 
 class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
-    """Get task by ID, update values, delete task."""
+    """Get task by ID, update values or delete task."""
 
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

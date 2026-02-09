@@ -3,6 +3,7 @@ from collections import defaultdict
 import structlog
 from django.shortcuts import get_object_or_404
 from django_filters import rest_framework as filters
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -10,11 +11,12 @@ from rest_framework.response import Response
 from .filters import TaskFilter
 from .models import Task
 from .permissions import IsOwner
-from .serializers import TaskSerializer, TaskTreeSerializer
+from .serializers import HealthSerializer, TaskSerializer, TaskTreeSerializer
 
 logger = structlog.get_logger(__name__)
 
 
+@extend_schema(responses={200: HealthSerializer})
 @api_view(["GET"])
 def health(request):
     """Health check."""

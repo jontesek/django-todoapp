@@ -3,6 +3,10 @@ from rest_framework import serializers
 from .models import Task
 
 
+class HealthSerializer(serializers.Serializer):
+    status = serializers.CharField(default="ok", read_only=True)
+
+
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task

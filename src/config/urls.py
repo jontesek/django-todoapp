@@ -23,11 +23,11 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 urlpatterns = [
     # Admin panel
     path("admin/", admin.site.urls),
-    # User login
-    path("api-auth/", include("rest_framework.urls")),
     # App routes
     path("tasks/", include("tasks.urls")),
-    # API docs
+    # Browsable API login (DRF)
+    path("api-auth/", include("rest_framework.urls")),
+    # API docs (Spectacular)
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path("api/docs/swagger/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     path("api/docs/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),

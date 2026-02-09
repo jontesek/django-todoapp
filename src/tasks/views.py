@@ -62,7 +62,7 @@ class RootTaskList(generics.ListAPIView):
     """List all tasks without parent."""
 
     serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return Task.objects.filter(user=self.request.user, parent=None)
@@ -72,7 +72,7 @@ class SubtasksList(generics.ListAPIView):
     """List all direct subtasks of the given task."""
 
     serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         task_id = self.kwargs.get("pk")
@@ -84,7 +84,7 @@ class SubtasksTreeList(generics.ListAPIView):
     """List all subtasks of the given task in a hierarchical tree structure."""
 
     serializer_class = TaskTreeSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
+    permission_classes = [permissions.IsAuthenticated]
     # Disable pagination to make sure the whole tree is returned
     pagination_class = None
 

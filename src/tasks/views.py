@@ -100,9 +100,9 @@ class SubtasksTreeList(generics.ListAPIView):
 
     def get_serializer_context(self):
         # Get all user tasks
-        user_tasks = Task.objects.filter(user=self.request.user).only("id", "parent_id")
+        user_tasks = Task.objects.filter(user=self.request.user)
 
-        # Build a mapping of parent_id -> list of children
+        # Build a mapping of parent_id -> list of child tasks
         children_map = defaultdict(list)
         for task in user_tasks:
             children_map[task.parent_id].append(task)  # type: ignore
